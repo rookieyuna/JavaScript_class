@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu09.html</title>
+</head>
+<body>
+    <h2>난수10개 생성</h2>
+    <hr>
+    <script>
+        var plots = new Array();
+        //난수생성 for문
+        for(var i=0; i<10; i++){
+            plots[i]=Math.floor(Math.random()*100)+1;
+            for(var j=0; j<i; j++){
+                if(plots[i]==plots[j]){
+                    i--;
+                }
+            }
+        }
+        //난수10개출력
+        for(var i=0; i<10; i++){
+            document.write(plots[i]+" ");
+        }
+        document.write("<hr>");
+        //난수 중 최대값 찾기
+        var maxNum = plots[0];
+        for(var x=1; x<10; x++){
+            if(maxNum < plots[x]) {
+                maxNum = plots[x];
+            }
+        }
+        document.write("가장큰수는? "+maxNum);
+    </script>
+</body>
+</html>

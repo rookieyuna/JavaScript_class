@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu04.html</title>
+    <script>
+        document.write("<h2>document.write()로 표만들기</h2>");
+        document.write("<hr>");
+
+        /*
+        더블이거나 싱글쿼테이션이 겹쳐지면 에러가 발생하므로
+        둘 중 하나만 사용하거나, 이스케이프 시퀀스를 통해 특수기호임을 알려줘야 한다.
+        혹은 HTML 속성값에 싱글이나 더블쿼테이션을 아예 쓰지않는 방법도 있다.
+        */
+        var tableStr;
+        tableStr="<table border='1'>";
+        for(var i=1; i<=2; i++){
+            tableStr+="<tr>";
+            if(i==1){
+                tableStr+="<td><b>n</b></td>";
+            }
+            else{
+                tableStr+="<td><b>n<sup>2</sup></b></td>";
+            }
+
+            for(var j=0; j<=9; j++){
+                if(i==1){
+                    tableStr+="<td>"+j+"</td>";
+                }
+                else{
+                    tableStr+="<td>"+(j*j)+"</td>";
+                }
+            }    
+        }
+        tableStr+="</table>";
+
+        document.write(tableStr);
+    </script>
+</head>
+<body>
+</body>
+</html>
