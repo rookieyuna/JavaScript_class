@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J10Date.html</title>
     <script>
+        /*
+        Date객체
+            setXXX() : 날짜를 설정할때
+            getXXX() : 날짜를 가져올때 사용한다. 
+        */
         document.write("<h2>JS의 Core객체 - Data</h2>");
-
+        
         var date = new Date();
         document.write("저장된값:"+date+"<br>");
+        //1900년부더 현재까지의 지난 년도를 반환한다. (1900을 더해야 함.)
         document.write("연도 변환"+ (date.getYear())+"<br>");
+        //0~11까지의 월을 반환. (1을 더해야함)
         document.write("월 변환:" +(date.getMonth())+"<br>");
 
         document.write(
@@ -21,7 +28,7 @@
             date.getMinutes()+"분 "+
             date.getSeconds()+"초<br>");
         
-
+        //올해 12월 25일 오후1시로 설정한다.
         date.setMonth(11);
         date.setDate(25);
         date.setHours(13);
