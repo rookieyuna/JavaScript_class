@@ -6,18 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qu01.html</title>
     <script>
-        document.write("<h2>특수기호를 인자갯수만큼 출력하기</h2>");
+        document.write("<h2>글자 원하는만큼 반복출력하기</h2>");
         document.write("<hr>");
 
-        function pr(str,repeat){
-            for(var i=1; i<=repeat; i++){
-                document.write(str);
+        //매개변수 word를 repeat만큼 반복출력하는 함수 printer 정의
+        function printer(word,repeat){
+            for(var i=1; i<=repeat; i++){ //1부터 repeat까지 반복수행
+                document.write(word); //word 출력
             }
-            document.write("<br>");
+            document.write("<br>"); //출력끝나면 줄바꿈
         }
-        pr('%',5);
-        pr('*',10);
-        pr('#',15);
+        printer('★',5);
+        printer('♡',7);
+        printer('안녕',10);
     </script>
 </head>
 <body>

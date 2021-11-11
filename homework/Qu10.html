@@ -11,18 +11,34 @@
     <hr>
     <script>
         var intArr =new Array();
+
+        //숫자 5개를 입력받아 배열에 저장하는 for문
         for(var i=0; i<5; i++){
-            intArr[i] = prompt("정수입력 "+(i+1)+"/5");
+            intArr[i] = parseInt(prompt("정수입력 "+(i+1)+"/5"));
         }
         
         document.write("입력된 수의 배열<br>")
         for(var i=0; i<intArr.length; i++){
             document.write(intArr[i]+" ");
         }
+
+        document.write("<hr>");
+        document.write("입력된 수를 역순으로 출력<br>")
+        for(var i=4; i>=0; i--){
+            document.write(intArr[i]+" ");
+        }
+
+        document.write("<hr>");
+        document.write("입력된 수를 역순으로 바꾼 후 차례로 출력<br>")
+        intArr.reverse();
+        for(var i=0; i<intArr.length; i++){
+            document.write(intArr[i]+" ");
+        }
+
         document.write("<hr>");
         var temp;
-        document.write("역순으로 재정렬된 배열<br>")
-        for(i=0; i<intArr.length; i++){
+        document.write("크기 역순으로 재정렬된 배열<br>")
+        for(i=0; i<intArr.length-1; i++){
             for(j=0; j<intArr.length-i-1; j++){
                 if(intArr[j]<intArr[j+1]){
                     temp = intArr[j];

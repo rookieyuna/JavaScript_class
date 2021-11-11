@@ -10,13 +10,19 @@
     <h2>문자열 배열 다루기</h2>
     <hr>
     <script>
-        var names = new Array("wonsun", "jaemoonlee", "kitae", "gracehwang");
-        //1. names 배열에 들어있는 각 이름을 출력하라
-        document.write("이름 : ");
-        for(var i=0; i<names.length; i++){
-            document.write(names[i]+" ");
+        //배열출력을 위한 함수 정의
+        function printArray(arr){
+            //매개변수로 전달된 배열의참조값으로 출력
+            for(var i=0; i<arr.length; i++){
+                document.write(arr[i]+" ");
+            }
+            document.write("<br>");
         }
-        document.write("<br>");
+
+        var names = new Array("rabbit", "moon", "apple", "enthusiastic");
+        //1. names 배열에 들어있는 각 이름을 출력하라
+        document.write("단어 배열 : ");
+        printArray(names);
 
         //2. 가장 긴 이름을 출력하라
         var longname = names[0];
@@ -25,24 +31,42 @@
                 longname = names[i];
             }   
         }
-        document.write("가장 긴 이름 : "+longname+"<br>");
+        document.write("가장 긴 단어 : "+longname+"<br>");
+
+
+    /*
+        Java에서는 문자열과 숫자의 비교가 불가능 하지만 JS는 가능
+        또한, 문자열 비교를 위해 equals와 같은 메서드를 서용하지 않는다
+        순수 비교연산자를 통한 비교가 가능하다.(단순히 사전순으로 비교)
+    */
+        //ex> 문자열비교 => 참출력
+        ("abcd"<"bcdf") ? document.write("참<br>"): document.write("거짓<br>");
 
         //3. 사전에서 가장 먼저 나오는 이름을 출력하라
         var firstname = names[0];
         for(var i=1; i<names.length; i++){
-            if(firstname.charCodeAt(0)>names[i].charCodeAt(0)) {
+            //if(firstname.charCodeAt(0)>names[i].charCodeAt(0)) {
+            if(firstname>names[i]) {
                 firstname = names[i];
             }   
         }
-        document.write("가장 먼저 나오는 이름 : "+firstname+"<br>");
+        document.write("사전순 첫번째 단어 : "+firstname+"<br>");
 
         //배열을 증가순으로 재 정렬하여 출력하라. 
         //(names.sort() 를 사용하면 오름차순으로 정렬됨)
-        document.write("증가순 이름 : ");
+        document.write("오름차순 정렬 : ");
         names.sort();
-        for(var i=0; i<names.length; i++){
-            document.write(names[i]+" ");
-        }
+        printArray(names);
+
+        'abcd'> 90 ? document.write("참"): document.write("거짓"); //거짓
+        "abcd"> "90" ? document.write("참"): document.write("거짓");//참
+        ('Glow' > 'Glee') ? document.write("참"): document.write("거짓");//참
+        document.write("abcd".charCodeAt(1)); //'a' = 98
+        
+        
+        /*
+        https://xtring-dev.tistory.com/entry/JS-자바스크립트-기본-비교-연산자
+        */
     </script>
 </body>
 </html>
