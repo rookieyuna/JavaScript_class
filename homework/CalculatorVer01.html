@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalculatorVer01</title>
+<style>
+    *{
+        border: none;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+        color: white;
+    }
+    table{
+        width: 422px; height: 366px;
+        border-radius: 10px;
+        background-color: #DDDDDD;
+    }
+    #lcd{
+        width: 413px; height: 83px; line-height: 83px;
+        border-radius: 10px;
+        background-color:#70C738;
+        box-sizing: border-box; overflow: hidden;
+        padding-right: 20px; padding-left: 20px;
+        font-size: 2em; color: #373737;
+        text-align: right;
+    }
+    .del_btn{
+        width: 202px; height: 50px;
+        border-radius: 10px;
+        background-color: #7B7B7B;
+    }
+    .num_btn{
+        width: 99px; height: 50px;
+        border-radius: 10px;
+        background-color:#373737;
+    }
+    .func_btn{
+        width: 99px; height: 50px;
+        border-radius: 10px;
+        background-color:#FA960A;
+    }
+</style>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <td colspan="4">
+                <div id="lcd">
+                    0
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" name="backspace" class="del_btn" value="BackSpace" onclick="backspace();">
+            </td>
+            <td colspan="2">
+                <input type="button" name="c" class="del_btn" value="C" onclick="make_Zero();">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" name="num_1" class="num_btn" value="1" onclick="inputAdd('1')";></td>
+            <td><input type="button" name="num_2" class="num_btn" value="2" onclick="inputAdd('2')";></td>
+            <td><input type="button" name="num_3" class="num_btn" value="3" onclick="inputAdd('3')";></td>
+            <td><input type="button" name="func_1" class="func_btn" value="/" onclick="inputAdd('/')";></td>
+        </tr>
+        <tr>
+            <td><input type="button" name="num_4" class="num_btn" value="4" onclick="inputAdd('4')";></td>
+            <td><input type="button" name="num_5" class="num_btn" value="5" onclick="inputAdd('5')";></td>
+            <td><input type="button" name="num_6" class="num_btn" value="6" onclick="inputAdd('6')";></td>
+            <td><input type="button" name="func_2" class="func_btn" value="x" onclick="inputAdd('*')";></td>
+        </tr>
+        <tr>
+            <td><input type="button" name="num_7" class="num_btn" value="7" onclick="inputAdd('7')";></td>
+            <td><input type="button" name="num_8" class="num_btn" value="8" onclick="inputAdd('8')";></td>
+            <td><input type="button" name="num_9" class="num_btn" value="9" onclick="inputAdd('9')";></td>
+            <td><input type="button" name="func_3" class="func_btn" value="+" onclick="inputAdd('+')";></td>
+        </tr>
+        <tr>
+            <td><input type="button" name="num_=" class="num_btn" value="=" onclick="calcul();"></td>
+            <td><input type="button" name="num_0" class="num_btn" value="0" onclick="inputAdd('0')";></td>
+            <td><input type="button" name="num_." class="num_btn" value="." onclick="inputAdd('.')";></td>
+            <td><input type="button" name="func_4" class="func_btn" value="-" onclick="inputAdd('-')";></td>
+        </tr>
+    </table>
+
+
+    <script>
+        var lcdStr = document.getElementById("lcd");
+    
+        function inputAdd(char){
+            if(lcdStr.innerHTML==0){
+                lcdStr.value = char;
+                lcdStr.innerHTML = lcdStr.value;
+            }
+            else{
+                lcdStr.value = lcdStr.value + char;
+                lcdStr.innerHTML = lcdStr.value;
+            }
+        }
+        
+        function backspace(){
+            if(lcdStr.innerHTML<10){
+                lcdStr.value = 0;
+                lcdStr.innerHTML = lcdStr.value;
+            }
+            else{
+                lcdStr.value = lcdStr.value.substring(0,lcdStr.value.length-1);
+                lcdStr.innerHTML = lcdStr.value;
+            }
+        }
+
+        function make_Zero(){
+            lcdStr.value = 0;
+            lcdStr.innerHTML = lcdStr.value;
+        }
+
+        function calcul() {
+            lcdStr.value = eval(lcdStr.value);
+            lcdStr.innerHTML = lcdStr.value;
+        }
+    </script>
+</body>
+</html>
