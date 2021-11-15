@@ -7,23 +7,29 @@
     <title>Qu14.html</title>
     <style>
         div {
-            width: 70px; height: 40px;
-            display: inline-block;
+            width: 100px; height: 70px; line-height: 70px; 
+            text-align: center; font-size: 1.1em;
+            /*[방법1] display: inline-block;*/
+            /*[방법2] float속성으로 div와 같은 블럭엘리먼트를 가로형으로 배치*/
+            float: left;
         }
     </style>
 </head>
 <body>
-    <h2>17개의 CSS2 색이름과 색</h2>
+    <h2>18개의 CSS2 색이름과 색</h2>
     <hr>
     <script>
         var colorNames = ["maroon", "red", "orange", "yellow", "olive", 
         "purple", "fuchsia", "white", "lime", "green", "navy", "blue", 
         "aqua", "teal", "black", "silver", "gray", "lightskyblue"];
+        var str ='';
 
-        for(var i=0; i<17; i++) {
-            document.write("<div style='background-color:"+colorNames[i]+"'>"
-                +colorNames[i]+"</div>");
+
+        for(var i=0; i<colorNames.length; i++) {
+            str += "<div style='background-color:"+colorNames[i]+"'>"+colorNames[i]+"</div>";
         }
+        document.write(str);
+        
     </script>
 </body>
 </html>

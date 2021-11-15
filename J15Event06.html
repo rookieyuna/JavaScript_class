@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J15Event06.html</title>
+    <script>
+        
+        function focusNBlur(num){
+            if(num==1){
+                document.getElementById("span").innerText = "focus이벤트 발생됨";
+            }
+            else if(num==2){
+                document.getElementById("span").innerText = "blur이벤트 발생됨";
+            }
+        }
+        
+        //HTML5의 placeholder 속성과 비슷하게 JS focus/blur속성으로 구현하기
+        function idFocus(flag,obj){
+            if(flag==1){
+                //포커스를 얻었을때 default value값 삭제
+                if(obj.value=="아이디를입력해주세요"){
+                    obj.value="";
+                }
+            }
+            else if(flag==2){
+                //포커스를 잃었을때(blur) 입력된 내용이 없다면 다시 default value값 입력
+                if(obj.value==""){
+                    obj.value="아이디를입력해주세요"; //힌트입력
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>focus & blur 이벤트</h2>
+    <input type="text" onfocus="focusNBlur(1);" onblur="focusNBlur(2);">
+    <span id="span"></span>
+
+    <h3>JS이용한 focus/blur 이벤트 예제</h3>
+    아이디1 : <input type="text" value="아이디를입력해주세요"
+        onfocus="idFocus(1,this);" onblur="idFocus(2, this);"
+        style="color: grey;">
+    <br>
+    <!-- placeholder를 통해 HTML5에서 제공하는 힌트 속성 -->
+    아이디2 : <input type="text" placeholder="아이디를입력해주세요">
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J15Event05.html</title>
+    <script>
+    /*
+    키보드 이벤트
+    keydown: 키보드를 누를 때 발생하는 이벤트. 한글키 및 shift와 같은 특수키도 모두 인식
+    keypress: 키보드를 누를 때 발생하는 이벤트. 문자키만 인식하지만 한글은 안되며, 특수키 인식안함
+    keyup: 키보드를 눌렀다가 뗐을 때 발생하는 이벤트.shift와 같은 특수키도 인식
+    */
+        var count = 0;
+        
+        function fnKeyHandler(flag){
+            count++;
+            var spanTag = document.getElementById("span");
+            switch(flag){
+            case 1 : 
+                spanTag.innerHTML = "keydown이벤트발생" + count; break;
+            case 2 : 
+                spanTag.innerHTML = "keypress이벤트발생" + count; break;
+            case 3 : 
+                spanTag.innerHTML = "keyup이벤트발생" + count; break;
+            }
+        }
+
+        function FnKeyEvent(){
+            var span = document.getElementById("keySpan");
+            //키보드 이벤트 발생시 눌러진 키보드의 코드값을 반환한다.
+            var keycode = event.keyCode;
+            //얻어온 keyCode값을 innerHTML을 통해 span 태그에삽입
+            span.innerHTML = keycode;
+            //지정한 키를 웹페이지에서 막야아 할 때 리스너쪽으로 false를 반환.
+            if(keycode==116 || keycode==8){
+                alert("해당 문서에서는 F5, Backspace 키는 사용할 수 없습니다.");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>키보드 이벤트</h2>
+    
+    <h3>key 이벤트 테스트</h3>
+    keydown : <input type="text" onkeydown="fnKeyHandler(1);">
+    <br>
+    keypress : <input type="text" onkeypress="fnKeyHandler(2);">
+    <br>
+    keyup : <input type="text" onkeyup="fnKeyHandler(3);">
+    <br>
+    <span id="span" style="font-size: 1.5em; color:red;"></span>
+
+
+    <h3>keyCode 이용하여 현재키 알아내기</h3>
+    F5와 Backspace키는 사용불가합니다.
+    <br>
+    <input type="text" onkeydown="return FnKeyEvent();">
+    <br>
+    <span id="keySpan" style="color: blue; font-size: 1.5em;"></span>
+
+
+    <script>
+        function fnJuminFocus(){
+            //주민번호 앞자리, 뒷자리 input태그 DOM을 변수에 저장
+            var ju1DOM = document.getElementById("ju1");
+            var ju2DOM = document.getElementById("ju2");
+            //입력한 글자 수 확인
+            var strLen = ju1DOM.value.length;
+            console.log("입력한 글자의 길이1", strLen)
+            //앞자리 6자리 입력시 뒷자리로 포커스 이동
+            if(strLen==6){
+                ju2DOM.focus();
+            }
+        }
+
+        /*
+        앞에서 정의한 포커스 이동 함수를 공용으로 사용하기 위해 
+        엘리먼트아이디(앞칸, 뒷칸)와 글자 수 부분을 매개변수로 처리
+            => fnFocusMove(현재입력중 input태그 id, 다음 입력할 input태그 id, 현재 input태그 최대글자수)
+        */
+        function fnFocusMove(id1, id2, num){
+            var thisObj = document.getElementById(id1);
+            var nextObj = document.getElementById(id2);
+            var strLen = thisObj.value.length;
+            console.log("입력한 글자의 길이2", strLen)
+            if(strLen==num){
+                nextObj.focus();
+            }
+        }
+    </script>
+
+    <h3>특정조건에서 포커스 이동하기</h3>
+    <!-- 
+    시나리오] 주민번호 앞 6자리를 입력하면 뒷자리로 포커스가 이동하는 함수 작성
+     -->
+    <h4>주민등록번호 입력하기</h4>
+    <input type="text" id="ju1" size="5" maxlength="6" onkeyup="fnJuminFocus();"> -
+    <input type="text" id="ju2" size="6" maxlength="7" onkeyup="fnFocusMove('ju2','tel1',7);">
+    <!-- 
+    연습문제] 시나리오와 마찬가지로 주민번호 뒷자리 입력 후 휴대전화로 포커스가
+        자동으로 이동하는 함수 작성
+     -->
+    <h4>휴대전화번호 입력하기</h4>
+    <input type="text" id="tel1" size="2" maxlength="3" onkeyup="fnFocusMove('tel1','tel2',3)"> -
+    <input type="text" id="tel2" size="3" maxlength="4" onkeyup="fnFocusMove('tel2','tel3',4)"> -
+    <input type="text" id="tel3" size="3" maxlength="4">
+
+</body>
+</html>

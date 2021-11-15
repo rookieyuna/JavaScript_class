@@ -8,10 +8,8 @@
 <style>
     *{
         border: none;
-        font-family: sans-serif;
-        font-weight: bold;
-        font-size: 20px;
-        color: white;
+        font-family: sans-serif; font-weight: bold; 
+        font-size: 20px; color: white;
     }
     table{
         width: 422px; height: 366px;
@@ -43,23 +41,69 @@
         background-color:#FA960A;
     }
 </style>
+<script>
+    //var lcdStr = document.getElementById("lcd"); //lcd라는 id를 가진 DOM을 아직 못봐서 오류
 
+    /*
+    lcdStr을 함수마다 선언하지 않고 전역변수로 사용하고 싶다면, 
+    load이벤트를 이용하여 문서의 로드가 끝난 후 DOM을 얻어와야 한다.
+    */
+    var lcdStr;
+    window.onload = function(){
+        lcdStr = document.getElementById("lcd");
+    }
+
+    function inputAdd(char){
+        //var lcdStr = document.getElementById("lcd");
+        var lcdLastChar = lcdStr.innerHTML.charAt(lcdStr.innerHTML.length-1);
+        if(lcdStr.innerHTML=='0' && (char=='+' || char=='*'|| char=='/'|| char=='-')){ 
+        }
+        else if((char=='+' || char=='*'|| char=='/'|| char=='-') &&
+            (lcdLastChar == '+'|| lcdLastChar=='*'|| lcdLastChar=='/'|| lcdLastChar=='-')){
+                lcdStr.innerHTML = lcdStr.innerHTML.substring(0,lcdStr.innerHTML.length-1)+char;
+        }
+        else if(lcdStr.innerHTML=='0'){
+            lcdStr.innerHTML = char;
+        }
+        else {
+            lcdStr.innerHTML += char; 
+        }
+    }
+    
+    function back_btn(){
+        //var lcdStr = document.getElementById("lcd");
+        if(lcdStr.innerHTML<10){
+            lcdStr.innerHTML = '0';
+        }
+        else{
+            lcdStr.innerHTML = lcdStr.innerHTML.substring(0,lcdStr.innerHTML.length-1);
+        }
+    }
+
+    function clear_btn(){
+        //var lcdStr = document.getElementById("lcd");
+        lcdStr.innerHTML = '0';
+    }
+
+    function calcul_btn() {
+        //var lcdStr = document.getElementById("lcd");
+        lcdStr.innerHTML = eval(lcdStr.innerHTML);
+    }
+</script>
 </head>
 <body>
     <table>
         <tr>
             <td colspan="4">
-                <div id="lcd">
-                    0
-                </div>
+                    <div id="lcd">0</div>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="button" name="backspace" class="del_btn" value="BackSpace" onclick="backspace();">
+                <input type="button" name="backspace" class="del_btn" value="BackSpace" onclick="back_btn();">
             </td>
             <td colspan="2">
-                <input type="button" name="c" class="del_btn" value="C" onclick="make_Zero();">
+                <input type="button" name="c" class="del_btn" value="C" onclick="clear_btn();">
             </td>
         </tr>
         <tr>
@@ -81,48 +125,11 @@
             <td><input type="button" name="func_3" class="func_btn" value="+" onclick="inputAdd('+')";></td>
         </tr>
         <tr>
-            <td><input type="button" name="num_=" class="num_btn" value="=" onclick="calcul();"></td>
+            <td><input type="button" name="num_=" class="num_btn" value="=" onclick="calcul_btn();"></td>
             <td><input type="button" name="num_0" class="num_btn" value="0" onclick="inputAdd('0')";></td>
             <td><input type="button" name="num_." class="num_btn" value="." onclick="inputAdd('.')";></td>
             <td><input type="button" name="func_4" class="func_btn" value="-" onclick="inputAdd('-')";></td>
         </tr>
-    </table>
-
-
-    <script>
-        var lcdStr = document.getElementById("lcd");
-    
-        function inputAdd(char){
-            if(lcdStr.innerHTML==0){
-                lcdStr.value = char;
-                lcdStr.innerHTML = lcdStr.value;
-            }
-            else{
-                lcdStr.value = lcdStr.value + char;
-                lcdStr.innerHTML = lcdStr.value;
-            }
-        }
-        
-        function backspace(){
-            if(lcdStr.innerHTML<10){
-                lcdStr.value = 0;
-                lcdStr.innerHTML = lcdStr.value;
-            }
-            else{
-                lcdStr.value = lcdStr.value.substring(0,lcdStr.value.length-1);
-                lcdStr.innerHTML = lcdStr.value;
-            }
-        }
-
-        function make_Zero(){
-            lcdStr.value = 0;
-            lcdStr.innerHTML = lcdStr.value;
-        }
-
-        function calcul() {
-            lcdStr.value = eval(lcdStr.value);
-            lcdStr.innerHTML = lcdStr.value;
-        }
-    </script>
+    </table> 
 </body>
 </html>
