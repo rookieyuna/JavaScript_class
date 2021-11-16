@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu22.html</title>
+</head>
+<body>
+    <h2>div태그에 시계 만들기</h2>
+    시계를 클릭하면 시계가 멈추고 다시 클릭하면 가기 시작한다.
+    <hr>
+    <div onmousedown="moveTime();" id="time" style="cursor: pointer; 
+        border: 1px solid black; width: 110px; display: inline-block;"></div>
+    <script>
+        //div#time에 실시간 시계 넣는 함수
+        function displayTime() {  
+            var str = '';
+            var timeDiv = document.getElementById("time")
+            var date = new Date();
+            if(date.getHours()<12){ //오전오후 구분
+                str += "오전 ";
+            }
+            else {
+                str += "오후 ";
+            }
+            str += date.getHours()+":"+ date.getMinutes()+":"+date.getSeconds();
+            timeDiv.innerHTML = str;
+        }
+        var timer = setInterval("displayTime()", 1000);//로드시 시계동작
+        var stopOrGo = 1;
+        function moveTime(){ //div클릭시 시계동작
+            if(stopOrGo==1){
+                clearInterval(timer);
+                stopOrGo=2;
+            }
+            else if (stopOrGo==2){
+                timer = setInterval("displayTime()", 1000);
+                stopOrGo=1;
+            }
+        }
+    </script>
+</body>
+</html>

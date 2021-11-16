@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu23Math(T).html</title>
+    <script>
+        function cal(){
+            var quArr = document.getElementsByClassName("question")
+            var anArr = document.getElementsByClassName("answer")
+
+            //정답개수 카운트용 변수
+            var total = 0;
+           
+            for(var i=0; i<quArr.length; i++){
+                //크기만큼 반복하면서 콘솔로 미리 문제/정답 출력확인!
+                //console.log("문제", quArr[i].innerHTML);
+                //console.log("정답", eval(quArr[i].innerHTML));
+
+                //Javascript에서 문제를 계산한 정답
+                var calAnswer = eval(quArr[i].innerHTML);
+                //사용자가 입력한 정답
+                var userAnswer = anArr[i].value;
+
+                if(calAnswer == userAnswer){ //정답인경우
+                    total++;
+                    //오답 수정하여 다시 정답 입력했을 때 <del>라인 제거
+                    quArr[i].style.textDecoration = "none";
+                }
+                else{ //오답인경우
+                    //style="text-decoration: line-through;" 활용
+                    quArr[i].style.textDecoration = "line-through";
+                }
+            }
+            document.getElementById("score").innerHTML=total;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <table>
+            <tr>
+                <td class="question">5*6</td>
+                <td><input type="text" class="answer" size="10" /></td>
+            </tr>
+            <tr>
+                <td class="question">7+5*3</td>
+                <td><input type="text" class="answer" size="10" /></td>
+            </tr>
+            <tr>
+                <td class="question">23*2</td>
+                <td><input type="text" class="answer" size="10" /></td>
+            </tr>
+            <tr>
+                <td class="question">35-7</td>
+                <td><input type="text" class="answer" size="10" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" onclick="cal();">
+                        채점
+                    </button>
+                </td>
+                <td>
+                    <span id="score">정답갯수:0</span>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

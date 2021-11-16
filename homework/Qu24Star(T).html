@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu24Star(T).html</title>
+    <script>
+        function printStar(num){
+            /*
+            매개변수로 전달된 값이 양의 정수이고 숫자인지 확인한다.            
+            */
+            var cnum = parseInt(num);
+            if(cnum<1 || isNaN(cnum)){
+                alert("입력오류입니다.");
+                return;
+            }
+
+            //반복횟수 (입력정수가 5라면 9번 반복)
+            var totalCnt = cnum *2;
+            //별 출력을 위한 반복횟수 변수
+            var starCnt = 0;
+            for(var i=1; i<totalCnt; i++){
+                if(i<=cnum){
+                    //변수i가 cnum이 될때까지는 증가하면서*출력
+                    starCnt = i;
+                    console.log("반복횟수", starCnt);
+                }
+                else{
+                    //cnum을 넘어가면 감소하면서 *출력
+                    starCnt = totalCnt-i;
+                    console.log("반복횟수", starCnt);
+                }
+
+                //starCnt개수만큼 반복출력하는 while문
+                while(starCnt>0){
+                    document.write("*");
+                    starCnt--;
+                }
+                document.write("<br>");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>별문자 출력하기</h2>
+    <hr>
+    <script>
+        var inputNum = parseInt(prompt("정수를 입력하세요"));
+        printStar(inputNum);
+    </script>
+</body>
+</html>

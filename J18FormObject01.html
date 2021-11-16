@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J18FormObject01.html</title>
+    <script>
+        function formValidate(){
+            /*
+            form태그를 배열형태로 얻어와서 사용하는 방법.
+            2개이상 존재할 수 있으므로 작성한 순서대로 인덱스가 부여된다.
+            */
+            var frm = document.forms[0];
+            //비교연산자로 id값이 빈값인지 확인 후 
+            if(frm.id.value==""){
+                alert("아이디를 입력해주세요"); //경고창실행
+                frm.id.focus(); //id로 포커스 이동후
+                return false; //submit이벤트리스너에 false반환 =>서버전송 중단
+            }
+            //not연산자로 pw값이 빈값인지 확인 후
+            if(!frm.pw.value){
+                alert("패스워드를 입력해주세요");
+                frm.pw.focus();
+                return false;
+            }
+            //return true; //=>통상적으로 사용하지 않음
+        }
+
+        function jsSubmit(){
+            /*
+            form태그의 name속성값을 통해 DOM 객체를 얻어온다 
+                (getElement사용안하고 바로 접근 가능)
+            */
+            var f = document.loginFrm2;
+            /*
+            JS를 통한 폼값 전송은 submit()함수를 사용하므로,
+            폼값의 유효성에 대한 문제가 있는경우에는 단순히 return으로 함수를 종료한다.
+            */
+            if(f.id.value==''){
+                alert("아이디를 입력해주세요");
+                f.id.focus();
+                return; // 함수를 종료하여 =>서버전송 중단
+            }
+            if(f.pw.value==""){
+                alert("패스워드를 입력해주세요");
+                f.pw.focus();
+                return;
+            }
+            /*
+            JS에서 action, method 속성을 부여하는 방법으로 이경우
+            HTML form태그에서 부여한 속성보다 우선순위가 높다 ★★★
+            */
+            f.action = "http://ikosmo.co.kr";
+            f.method = "get";
+            f.submit(); //서버로 폼값을 전송한다.
+        }
+    </script>
+</head>
+<body>
+    <h2>form전송방식 - HTML을 사용하는 방법</h2>
+    <form name="loginFrm1" method="get" onsubmit="return formValidate();">
+        아이디: <input type="text" name="id">
+        <br>
+        패스워드: <input type="password" name="pw">
+        <br>
+        <!-- 폼값 전송시 submit을 활용한다. 누르는 즉시 submit 이벤트가 발생한다 -->
+        <input type="submit" value="로그인">
+    </form>
+
+
+    <h2>form전송방식 - Javascript를 사용하는 방법</h2>
+    <form name="loginFrm2" method="post" action="abcd.html">
+        아이디: <input type="text" name="id">
+        <br>
+        패스워드: <input type="password" name="pw">
+        <br>
+        <!-- JS로 폼값 전송시에는 일반적인 버튼을 사용하고 JS의 submit()함수를 사용한다. -->
+        <input type="button" value="로그인" onclick="jsSubmit();">
+    </form>
+</body>
+</html>

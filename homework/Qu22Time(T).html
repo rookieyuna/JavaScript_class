@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu22Time(T).html</title>
+    <script>
+        //타이머로 사용할 전역변수 생성
+        var timeID = null;
+
+        window.onload=function(){ //문서로드 완료 후 실행되는 함수
+            var clock = document.getElementById("clock");
+            //1초에 한번씩 nowTime()함수 계속 호출
+            timeID = setInterval("nowTime(clock)",1000); 
+            
+        }
+        function nowTime(clockObj){
+            //Date객체를 생성
+            var date = new Date();
+            /*
+            toLocaleTimeString(): Dtae객체를 통해 생성된 시간을 
+                오후 00:00:00 포맷으로 반환해주는 함수.
+            */
+            clockObj.innerHTML = date.toLocaleTimeString();
+        }
+        function ctrlClock(){
+            if(timeID==null){
+                timeID=setInterval("nowTime(clock)",1000);
+            }
+            else{
+                /*
+                문서의 로드가 끝난 후 타이머가 즉시 동작되므로 최초의 상태는
+                시간이 흘러가는 상태이다. 따라서 시계를 멈춰주고 null로 전환
+                */
+                clearInterval(timeID);
+                timeID=null;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>div에 시계 만들기</h2>
+    <p>시계를 클릭하면 멈추고, 다시 클릭하면 움직인다.</p>
+    <hr>
+    <div id="clock" onclick="ctrlClock();"
+        style="cursor: pointer; width: 110px; background-color: chocolate;"></div>
+</body>
+</html>

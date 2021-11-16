@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu24Star.html</title>
+    <script>
+        while(1){
+            var num = prompt("정수를 입력하세요");
+            if(num>0){
+                break;
+            }
+            else{
+                window.alert("입력오류입니다.");
+            }
+        }
+        
+        document.write("<h2>별 문자 출력하기</h2>")
+        document.write("<hr>");
+
+        function printStar(){
+            for(var i=0; i<num; i++){
+                for(var j=0; j<i; j++){
+                    document.write("*");
+                }
+                document.write("<br>");
+            }
+            for(var i=num; i>0; i--){
+                for(var j=0; j<i; j++){
+                    document.write("*");
+                }
+                document.write("<br>");
+            }
+        }
+        printStar();
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -104,7 +104,7 @@
 
     <script>
         //전역변수를 선언
-        var time, count=1, divObj;
+        var timer, count=1, divObj;
         //엘리먼트를 클릭(down)했을 때 호출되는 함수
         function setTimer(obj){
             //div태그의 DOM 객체를 전역변수에 저장한다.
@@ -146,7 +146,9 @@
             obj.src = "./images/2.jpg";
         }
         function mouseoutFunc() {
-            imgObj.src = "./images/1.jpg";
+            var img = document.getElementsByTagName("img");
+            img[0].src = "./images/1.jpg";
+            //obj.src = "./images/1.jpg"; 방법2
         }
         function mousedownFunc() {
             imgObj.style.width = parseInt(imgObj.style.width)*2+"px";
@@ -156,14 +158,19 @@
             imgObj.style.width = parseInt(imgObj.style.width)/2+"px";
             imgObj.style.height = parseInt(imgObj.style.height)/2+"px";
         }
+        window.onload = function(){
+            var img = document.getElementsByTagName("img");
+            img[0].onmousedown=mousedownFunc;
+            img[0].onmouseup=mouseupFunc;
+        }
+        
+        //onload에 imgObj쓰면 왜 구동이 안될까유?!?!?!?!?!??!
+
     </script>
     <h3>이미지에 마우스 이벤트 적용하기</h3>
 	<img src="./images/1.jpg" alt="하트" style="width:225px;height:313px;"
 		onmouseover="mouseoverFunc(this);" 
 		onmouseout="mouseoutFunc();"
-        onmousedown="mousedownFunc();"
-        onmouseup="mouseupFunc();"
 		/>
-
 </body>
 </html>

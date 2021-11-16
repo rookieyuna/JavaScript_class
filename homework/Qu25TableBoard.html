@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu25TableBoard.html</title>
+    <style>
+        table{
+            background-color: rgb(129, 129, 129);
+            text-align: center;
+            border-spacing: 1px;
+        }
+        th, td{
+            background-color: white;
+            padding: 2px;
+        }
+        tr>td:nth-child(2){
+            text-align: left;
+        }
+    </style>
+    <script>		
+        var subjectList = ["美 의회조사국 '한미, 대북정책 놓고 갈등 가능성'",
+            "文정부 타깃 고소득층·대기업 비과세감면 얼마나 줄까",
+            "서울 집값 고공행진에 가계대출 '풍선효과'도 커져",
+            "엔본부 첫 5·18세미나…'세계 민주 모델 재조명'"];
+        var nameList = ["연합뉴스", "민중의소리", "오마이뉴스", "스브스뉴스"];
+        var dateList = ["2017-05-20", "2017-05-22", "2017-05-24", "2017-05-26"];
+        var hitList = [100, 199, 999, 88];
+        
+        var tableStr ='';
+         
+        tableStr += "<table>"
+                        +"<tr>"
+                            +"<th>NO</th>"
+                            +"<th>제목</th>"
+                            +"<th>작성자</th>"
+                            +"<th>작성일</th>"
+                            +"<th>조회수</th>"
+                        +"</tr>";
+        for(var i=0; i<4; i++){
+            tableStr += "<tr>"
+                        + "<td>"+(i+1)+"</td>"
+                        + "<td>"+subjectList[i]+"</td>"
+                        + "<td>"+nameList[i]+"</td>"
+                        + "<td>"+dateList[i]+"</td>"
+                        + "<td>"+hitList[i]+"</td>"
+                    + "</tr>";
+        }
+        tableStr += "</table>";
+
+        window.onload = function(){
+            document.getElementById("boardList").innerHTML = tableStr;
+        }
+    </script>
+</head>
+<body>
+    <h3>오늘의 뉴스</h3>
+    <hr>
+    <span id="boardList"></span>
+    
+</body>
+</html>

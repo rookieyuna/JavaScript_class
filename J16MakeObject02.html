@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J16MakeObject02.html</title>
+    <script>
+        /*
+        객체선언방법2: 
+        */
+        
+        var account = {
+            //멤버변수정의
+            owner : "홍길동",
+            code : "12345-67-899",
+            balance : 150000,
+
+            //멤버함수정의
+            inquiry : function (){ //잔고확인
+                return this.balance;
+            },
+            deposit : function(money){ //입금처리
+                this.balance += money;
+            },
+            withdraw : function(money){ //출금처리
+                this.balance -= money;
+                return money;
+            }
+        };
+    </script>
+</head>
+<body>
+    <h2>리터럴 표기법으로 사용자객체 만들기</h2>
+
+    <script>
+        document.write("account객체=><br>");
+        document.write("소유자:"+account.owner+"<br>");
+        document.write("계좌번호:"+account.code+"<br>");
+        document.write("잔액:"+account.balance+"<br>");
+
+        account.deposit(9000);
+        document.write("9000원 입금 후 잔액:"+account.inquiry()+"<br>");
+        //return값이 있는경우 좌측항사용가능
+        var wMoney = account.withdraw(20000);
+        document.write("출금액:"+ wMoney +"<br>");
+        document.write("20000원 출금 후 잔액:"+account.inquiry()+"<br>");
+    </script>
+</body>
+</html>

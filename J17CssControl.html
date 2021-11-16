@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J17CssControl.html</title>
+    <script>
+        var pTag, pSize;
+        window.onload = function(){
+            //기사가있는 p태그의 DOM을 얻어옴
+            pTag = document.getElementById("article");
+            //현재 설정된 폰트사이즈를 숫자형태로 얻어옴(기본16px)
+            pSize = parseInt(pTag.style.fontSize);
+        }
+
+        function fnArticle(flag){
+            /*
+            JS에서 CSS속성 컨트롤
+                : DOM.style.CSS속성 = "속성값";
+                단, 이때 CSS속성에 하이픈이 들어간다면 제거 후 첫글자를 대문자로 기술
+                또한 크기를 설정할때는 반드시 px와 같은 단위를 기술해야한다.
+            */
+            switch(flag){
+
+            case "+":
+                pSize +=10; 
+                pTag.style.fontSize = pSize+"px";
+                break;
+            case "-":
+                pSize -=10; 
+                pTag.style.fontSize = pSize+"px";
+                break;
+
+            case "R":
+                pTag.style.color = "red"; break;
+            case "G":
+                pTag.style.color = "lightgreen"; break;
+            case "B":
+                pTag.style.color = "skyblue"; break;
+           
+            case "Bo":
+                pTag.style.fontWeight = "bold"; break;
+            case "No":
+                pTag.style.fontWeight = "normal"; break;
+            case "Ce":
+                pTag.style.textAlign = "center"; break;
+            case "Le":
+                pTag.style.textAlign = "left"; break;
+
+            case "B_pink":
+                pTag.style.backgroundColor = "lightpink"; break;
+            case "B_silver":
+                pTag.style.backgroundColor = "silver"; break;
+            case "B_white":
+                pTag.style.backgroundColor = "white"; break;
+
+            default:
+                pTag.style.color = "black";
+            }
+        }
+
+    /*
+    연습문제] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
+        폰트가 토글되어 적용될 수 있도록 함수를 정의하시오.
+        글꼴 : Verdana, 굴림체, 휴면옛체, 궁서, Impact
+    */
+        var fontNum = 0;
+        function setFont(){
+            var fontToggle = ['Verdana', '굴림체', '휴면옛체', '궁서', 'Impact']
+            
+            pTag.style.fontFamily = fontToggle[fontNum++];
+            if(fontNum==5){fontNum = 0;}
+        }
+
+    </script>
+    <style>
+        body { font-family: 굴림체;}
+    </style>
+</head>
+<body>
+    <h2>자바스크립트로 CSS제어하기</h2>
+    <input type="button" value="글꼴바꾸기" onclick="setFont( );">
+    <fieldset>
+        <legend>신문기사</legend>
+        <button onclick="fnArticle('+');">+</button>
+        <button onclick="fnArticle('-');">-</button>
+        <button onclick="fnArticle('R');">Red</button>
+        <button onclick="fnArticle('G');">Green</button>
+        <button onclick="fnArticle('B');">Blue</button>
+        <button onclick="fnArticle('');">Black</button>
+        <button onclick="fnArticle('Bo');">볼드체</button>
+        <button onclick="fnArticle('No');">보통체</button>
+        <button onclick="fnArticle('Ce');">중앙정렬</button>
+        <button onclick="fnArticle('Le');">좌측정렬</button>
+        <button onclick="fnArticle('B_pink');">배경(pink)</button>
+        <button onclick="fnArticle('B_silver');">배경(silver)</button>
+        <button onclick="fnArticle('B_white');">배경(white)</button>
+    </fieldset>
+
+    <p style="font-size: 12px;" id="article">
+        문화체육관광부는 한국공예·디자인문화진흥원(이하 공진원) 한복진흥센터와 함께 한복을 해외에 널리 알리고자 영국 빅토리아 앨버트 박물관(이하 박물관)과 협력한다고 16일 밝혔다.
+        <br>
+        그 첫걸음으로 문체부와 공진원은 공동으로 개발한 한복 교복과 기증서를 박물관 수석 전시기획자인 로잘리 김에게 전달한다. 기증식은 이날 오후 3시 서울 종로구 한복진흥센터에서 열린다.
+        <br>
+        박물관은 내년 9월부터 2023년 6월까지 ‘한류(Hallyu! The Korean Wave)’를 주제로 하는 기획전을 처음 열 예정이다. 기획전에서는 이번에 기증한 한복 교복 외에도 K팝 스타들이 입은 한복, 그리고 전통한복 등을 전시한다.
+        <br>
+        문체부가 기증한 한복 교복은 곧은깃 덧저고리, 사폭변형바지로 구성된 남학생용 교복과 한복 내리닫이(원피스) 형태를 현대적으로 변형한 단령덧저고리 원피스 디자인의 여학생용 교복 각 1벌씩이다. 문체부와 한복진흥센터는 일상에서 한복 입는 문화를 확산하기 위해 2019년부터 한복 교복을 개발해 보급하고 있다.
+        <br>
+        최근 한류 열풍 속에서 한복에 대한 세계적인 관심도 높아지고 있다. 방탄소년단(BTS), 블랙핑크 등 K팝 스타들이 한복을 무대의상으로 입어 화제가 됐다. 지난 9월엔 영국 옥스퍼드 영어사전에 새로운 한국어 단어로 ‘한복(hanbok)’이 등재되기도 했다.
+        <br>
+        이진식 문체부 문화정책관은 “이번 전시에서 한복 교복뿐 아니라 전통한복, 생활한복 등 다양한 한복을 선보일 수 있도록 박물관과 협력하겠다”며 “아울러 앞으로 한류 스타를 활용한 해외 판로 개척 지원, 재외공관 한복 체험 등으로 한복의 세계화에 박차를 가하겠다”고 말했다.
+    </p>
+</body>
+</html>
