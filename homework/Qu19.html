@@ -10,18 +10,32 @@
         img { position : absolute; }
     </style>
     <script>
+        var imgArr = document.getElementsByTagName("img");
         window.onload= function(){
-            var imgArr = document.getElementsByTagName("img");
-            for(var i=0; i<4; i++){
-            imgArr[i].style.zIndex=i;
+            for(var i=0; i<4; i++){ //이미지 우선순위를 위한 z-index 초기화
+                imgArr[i].style.zIndex=i;
             }
         }
-        function zChange(imgthis){
-            var imgArr = document.getElementsByTagName("img");
+        function zChange(clickImg){
             for(var i=0; i<4; i++){
-            imgArr[i].style.zIndex+=1;
+                imgArr[i].style.zIndex+=1;
             }
-            imgthis.style.zIndex=0;
+            clickImg.style.zIndex=0;
+        }
+
+        //선생님방법
+        function suffle(){
+            /*
+            1번카드 : 0 => 0++ => 1 => 1%4 => 1
+            2번카드 : 1 => 1++ => 2 => 2%4 => 2
+            3번카드 : 2 => 2++ => 3 => 3%4 => 3
+            7번카드 : 3 => 3++ => 4 => 4%4 => 0 -> 제일아래로 이동
+            
+            */
+            for(var i=0; i<4; i++){
+                imgArr[i].style.zIndex++;
+                imgArr[i].style.zIndex %= imgArr.length;
+            }
         }
     </script>
 </head>

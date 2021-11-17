@@ -6,22 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qu20.html</title>
     <script>
-        function focusNBlur(flag){
-            if(flag==1){
-                document.body.style.backgroundColor="white";
-            }
-            else if(flag==2){
-                document.body.style.backgroundColor="grey";
-            }
-        }
+
+    window.onfocus = function(){
+        document.body.style.backgroundColor = "white";  
+        document.frm.user_id.focus();
+    }
+    window.onblur = function(){
+        document.body.style.backgroundColor = "gray";
+    }
+
     </script>
 </head>
-<body onfocus="focusNBlur(1);" onblur="focusNBlur(2);">
+<body>
     <h2>포커스와 onblur, onfocus</h2>
     <hr>
     <div>
         브라우저 바깥에 마우스를 클릭하면 window객체에 blur 이벤트가 발생하고
         다시 마우스를 클릭하면 window 객체에 focus 이벤트가 발생한다.
     </div>
+    <form name="frm">
+        아이디 : <input type="text" name="user_id" size="20">
+    </form>
 </body>
 </html>

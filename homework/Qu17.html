@@ -5,28 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qu17.html</title>
+    <style>
+        span{
+        /*
+        엘리먼트의 보임/숨김을 위한 속성
+            -display: 숨김처리하면 컨텐츠와 컨텐츠 공간도 사라짐
+            -visibility: 숨김처리를 하면 컨텐츠만 없어지고 공간유지
+                (visible/hidden)
+        */
+            visibility: hidden;
+        }
+    </style>
     <script>
-        var state = "show";
+        var state = "hide";
         function word_toggle(){
         var spans = document.getElementsByTagName("span");
-            if(state=="show"){
-                for(var i=1; i<4; i++){
-                    spans[i].style.color="white";
-                }
-                state = "hide";
-            }
-            else{
-                for(var i=1; i<4; i++){
-                    spans[i].style.color="black";
+            if(state=="hide"){
+                for(var i=0; i<spans.length; i++){
+                    spans[i].style.visibility="visible";
                 }
                 state = "show";
+            }
+            else{
+                for(var i=0; i<spans.length; i++){
+                    spans[i].style.visibility="hidden";
+                }
+                state = "hide";
             }
         }
     </script>
 </head>
 <body>
-    <span style="font-weight: bold; font-size: 20px;">다음 빈 곳에 숨은 단어?</span>
-    <input type="button" value="show/hide" onclick="word_toggle();">
+    <h2>다음 빈 곳에 숨은 단어?
+        <input type="button" value="show/hide" onclick="word_toggle();">
+    </h2>
     <ul>
         <li>I (<span>love</span>) you.
         <li>CSS is Cascading (<span>Style</span>) Sheet.
