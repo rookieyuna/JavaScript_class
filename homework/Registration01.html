@@ -20,7 +20,7 @@
         .btn_cancel{width:120px;height:28px;font-weight:bold;cursor:pointer;background-color: #464646;color:white;font-size: 14px;}
         .w20{width:20px;} .w30{width:30px;} .w40{width:40px;} .w50{width:50px;} .w100{width:100px;} 
         .w300{width:300px;} .w510{width:510px;} .w410{width:410px;} 
-        #id_loading{position:absolute;top:530px;z-index:10;width:100%;text-align:center;display:block;}
+        #id_loading{position:absolute;top:530px;z-index:10;width:100%;text-align:center;display:none;}
     </style>
     <script>
 
@@ -31,11 +31,18 @@
                 document.myform.email2.value='';
                 document.myform.email2.focus();
             }
+            else{
+
+            }
         }
         //전화번호 입력시 자동으로 포커스 이동하는 함수
         function fnFocusMove(name1, name2, num){
             var thisObj = document.getElementsByName(name1);
-            var nextObj = document.getElementsByName(name2); 
+            var nextObj = document.getElementsByName(name2);
+            
+            //var thisObj = eval('document.myform.'+name1); //name1은 문자열이므로 나머지를 문자열화 시켜서
+            //var nextObj = eval('document.myform.'+name2); //eval 함수로 씌워주면 해당 문자열이 그대로 실행됨
+            
             var strLen = thisObj[0].value.length;
             if(strLen>=num){
                 nextObj[0].focus();
@@ -53,6 +60,7 @@
             //아이디 검증작업1-아이디 길이 확인
             if(frm.id.value.length<8 ||frm.id.value.length>12){
                 alert('아이디는 8~12자로 입력하세요');
+                frm.id.value=''; //지워준다
                 frm.id.focus();
                 return false;
             }
@@ -136,8 +144,26 @@
                 frm.etc_no2.focus();
                 return false;
             }
-        }
 
+            document.getElementById("id_loading").style.display="block";
+            return false;
+        }
+    </script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    
+    <script>
+    function addressFind(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                var frm = document.myform;
+                frm.zipcode.value=data.zonecode;
+                frm.addr1.value=data.address;
+                frm.addr2.focus();
+            }
+        }).open();
+    }
     </script>
 </head>
 <body>
@@ -248,7 +274,7 @@
             <tr>
                 <td class="userTit" rowspan="3"><span style="margin-left:10px;"></span> 주소</td>
                 <td class="userVal">
-                    <button type="button" class="btn_search" onClick="">주소찾기</button>
+                    <button type="button" class="btn_search" onClick="addressFind();">주소찾기</button>
                     <input type="text" name="zipcode" maxlength="10" value="" class="userInput w50" /> (우편번호)
                 </td>
             </tr>
@@ -332,7 +358,7 @@
             </tr>
         </table>
         <div id="id_loading">
-            <img src="./images/loading.gif" style="width:40%;" />
+            <img src="../images/loading.gif" style="width:40%;" />
         </div>
     </form>
 </body>
