@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UpdownGame.html</title>
+<style>
+    input[type="button"] { /*예쁜버튼 만들기..*/
+        position: relative;
+        background-color: #1abc9c; border-radius: 4px;
+        color: #fff; line-height: 20px;
+        -webkit-transition: none; transition: none;
+        box-shadow: 0 3px 0 #0e8c73;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    }
+    input[type="button"]:hover {
+        background-color: #31c8aa; box-shadow: 0 3px 0 #23a188;
+    }
+    input[type="button"]:active {
+        top: 3px; box-shadow: none;
+    }
+</style>
+<script>
+    //랜덤번호 생성
+    var randomNum= Math.floor(Math.random()*100)+1; 
+    var gameCount = 0; //게임시도횟수
+    console.log(randomNum);
+
+    function game(){
+        var input = document.getElementById("numInput");
+        var new_btn = document.getElementById("new_btn");
+        var img = document.getElementById("img");
+        var countSpan = document.getElementById("count");
+
+        if(input.value<1 || input.value>100){ //입력값이 1~100이 아닐때
+            alert("1~100사이의 정수를 입력해 주세요");
+            img.src = "../images/error.jpg"
+            input.value='';
+        }
+        else{
+            if(input.value<randomNum){ //랜덤번호보다 작으면 up이미지
+                img.src = "../images/up.jpg"
+            }
+            else if(input.value>randomNum){//랜덤번호보다 크면 down이미지
+                img.src = "../images/down.jpg"
+            } 
+            else{ //맞추면 정답이미지
+                img.src = "../images/answer.jpeg"
+                alert("정답입니다!");
+                new_btn.style.display="inline"; //새로고침 버튼 나타내기
+
+            }
+            gameCount++; //게임시도횟수 증가
+            countSpan.innerHTML = gameCount;
+        }
+
+        if(gameCount>7){
+            alert("시도횟수를 초과하였습니다. 게임을 다시 시작합니다.")
+            newGame(); //새게임
+        }
+    }
+    function newGame(){ //새게임시작하기 위한 페이지 리로드
+        location.reload();
+    }
+</script>
+</head>
+<body>
+    <h1>업다운 게임</h1>
+    <h3>1~100 사이의 숫자를 입력하시오</h3>
+    <h3>시도횟수 : <span id="count">0</span>회</h3>
+
+    숫자입력 : 
+    <input type="text" id="numInput" value="">
+    <input type="button" value="확인" id="numSubmit" onclick="game();">
+    <input type="button" value="새로고침" id="new_btn" onclick="newGame();" style="display: none;">
+
+    <br><br>
+    <img src="../images/updowngame.jpg" id="img" alt="img" width="300px">
+</body>
+</html>
